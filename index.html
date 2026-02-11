@@ -3,16 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тестовый сайт</title>
+    <title>Меры детского развития | Бежевый стиль</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 50px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; }
-        h1 { font-size: 3em; margin-bottom: 20px; }
-        p { font-size: 1.5em; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fcf8f0; /* мягкий бежевый фон */
+            color: #4e4036; /* глубокий тёплый серо-коричневый */
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .page {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: rgba(255, 251, 240, 0.7);
+            border-radius: 40px 40px 20px 20px;
+            box-shadow: 0 15px 35px -10px rgba(120, 90, 70, 0.08);
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(2px);
+            border: 1px solid #f0e4d5;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #6b4f3c;
+            margin-bottom: 0.25rem;
+            border-bottom: 2px solid #eadbc8;
+            display: inline-block;
+            padding-bottom: 0.2em;
+        }
+
+        .subhead {
+            color: #9f7e6b;
+            font-size: 1.2rem;
+            font-weight: 350;
+            margin-top: 0.6rem;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid #dbbfa5;
+            padding-left: 1.5rem;
+            background: linear-gradient(to right, #fbf3ea, transparent);
+        }
+
+        /* сетка для блоков мероприятий */
+        .program-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .program-section {
+            background: #fffefb;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 6px 18px #ede3d7;
+            border: 1px solid #f5e7dd;
+            transition: all 0.2s ease;
+        }
+
+        .program-section:hover {
+            box-shadow: 0 12px 24px #e5d5c6;
+        }
+
+        .week-title {
+            display: inline-block;
+            background: #dcc9b5;
+            color: #3f322a;
+            padding: 0.4rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            margin-bottom: 1.8rem;
+            border: 1px solid #c9b09b;
+            text-transform: uppercase;
+            color: #2c241e;
+        }
+
+        .event-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .event-card {
+            background: #fffbf5;
+            border-radius: 20px;
+            padding: 1.6rem 1.4rem;
+            border: 1px solid #efdfd1;
+            box-shadow: 0 3px 8px rgba(176, 146, 122, 0.05);
+            transition: transform 0.15s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+            background: #fffdf9;
+            border-color: #ddc7b6;
+        }
+
+        .event-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #5e4233;
+            line-height: 1.3;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px dashed #ebd8ca;
+            padding-bottom: 0.5rem;
+        }
+
+        .event-detail {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .event-detail .label {
+            font-weight: 600;
+            color: #7b5f4e;
+            min-width: 70px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            opacity: 0.8;
+        }
+
+        .event-detail .value {
+            color: #4e3f37;
+            font-weight: 450;
+        }
+
+        .target-badge {
+            background: #f6ede6;
+            border-radius: 50px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.4rem;
+            color: #6a4d3c;
+            border: 1px solid #ebd6ca;
+            font-weight: 550;
+        }
+
+        .result-block {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #f0e1d6;
+            font-size: 0.9rem;
+            color: #6f5547;
+            background: #fff9f2;
+            padding: 0.9rem;
+            border-radius: 14px;
+        }
+
+        .result-icon {
+            font-weight: 600;
+            color: #9b6f56;
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .footer-contacts {
+            margin-top: 3.5rem;
+            background: #efe2d6;
+            border-radius: 48px 48px 24px 24px;
+            padding: 2rem 2.5rem;
+            color: #3a2f29;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #dac2b2;
+            background: linear-gradient(145deg, #f4eae2, #eadace);
+        }
+
+        .contact-info h3 {
+            font-weight: 550;
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            color: #4b372c;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-detail {
+            font-size: 1.05rem;
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .partner-line {
+            margin-top: 0.7rem;
+            font-style: italic;
+            background: #d7c5b8;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            color: #2f241f;
+        }
+
+        .org {
+            font-weight: 700;
+            color: #5c443a;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px dotted #dccbbd;
+            margin: 2rem 0 1rem;
+        }
+
+        .tiny-note {
+            font-size: 0.8rem;
+            color: #9b8579;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .page { padding: 1.5rem; }
+            h1 { font-size: 2rem; }
+        }
+
+        /* адаптивность */
+        .mission-tag {
+            background: #e6d7cb;
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #41312a;
+            display: inline-block;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .coordinator {
+            background: #faf1ea;
+            border-radius: 16px;
+            padding: 0.6rem 1rem;
+        }
+
+        .task-list {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #4f423b;
+        }
+
+        .task-list li {
+            margin-bottom: 0.25rem;
+        }
     </style>
 </head>
 <body>
-    <h1>🎉 Сайт работает!</h1>
-    <p>GitHub Pages успешно хостит эту страницу.</p>
-    <p>Если видишь градиент и заголовок — всё ок!</p>
+    <div class="page">
+        
+        <h1>Меры детского развития</h1>
+        <div class="subhead">
+            ✦ программа воспитания и социализации · весна 2026 ✦
+        </div>
+
+        <!-- БЛОК 1: МИР КОМПЛИМЕНТОВ (исходный первый текст) -->
+        <div class="program-section">
+            <span class="week-title">💬 Неделя добрых слов</span>
+            <div class="event-cards">
+                
+                <!-- Виртуальная экскурсия «Путешествие по миру комплиментов» -->
+                <div class="event-card">
+                    <div class="event-name">🖼️ Путешествие по миру комплиментов</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Виртуальная экскурсия</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">02.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 курс</span>
+                    <div class="result-block"><span class="result-icon">✨ результат</span> Активный обмен комплиментами, «стена» комплиментов</div>
+                    <div class="coordinator" style="margin-top: 10px;">🧑‍🏫 Рук. медиа-цеха Шершнева Е.В.</div>
+                </div>
+                <!-- Встреча с гостем «Сила добрых слов» -->
+                <div class="event-card">
+                    <div class="event-name">🤝 Сила добрых слов</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Встреча с гостем</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">03.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 2 курс</span>
+                    <div class="result-block"><span class="result-icon">📘 результат</span> Сборник мудрых мыслей о комплиментах от гостя</div>
+                    <div class="coordinator" style="margin-top: 10px;">🧑‍🏫 Зам.директора по ВР Колодий Е.Е.</div>
+                </div>
+                <!-- Конкурсная игровая «Право на доброе слово» -->
+                <div class="event-card">
+                    <div class="event-name">⚖️ Право на доброе слово</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Конкурсная игровая</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">04.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 ЗАДАННАЯ</span>
+                    <div class="result-block"><span class="result-icon">🎨 результат</span> Правовая Палитра Комплиментов</div>
+                    <div class="coordinator" style="margin-top: 10px;">🧑‍🏫 Педагог доп.образования Осипов Р.В.</div>
+                </div>
+                <!-- Дискуссия «Комплимент, как инструмент» -->
+                <div class="event-card">
+                    <div class="event-name">🗣️ Комплимент — инструмент общения</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Дискуссия</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">05.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 и 2 курс</span>
+                    <div class="result-block"><span class="result-icon">🧭 результат</span> Карта добрых мыслей: Комплимент-навигатор</div>
+                    <div class="coordinator" style="margin-top: 10px;">🧑‍🏫 Советник директора Иванова М.С.</div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.9rem; color: #7b655b; background: #f5ede7; padding: 0.5rem 1rem; border-radius: 40px;">
+                🎯 Цель: Развитие культуры доброжелательности и взаимоуважения через осознанное использование комплиментов · Организатор: ГБПОУ «ЮУМК» · Партнёр: АНО «Центр народного единства»
+            </div>
+        </div>
+
+        <!-- БЛОК 2: ЦИФРОВАЯ ГИГИЕНА / ОФЛАЙН (второй текст) -->
+        <div class="program-section">
+            <span class="week-title">📱 Неделя без экрана</span>
+            <div class="event-cards">
+                <!-- Квест «Вживую» -->
+                <div class="event-card">
+                    <div class="event-name">🔍 Квест «Вживую»</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Квест</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">02.02.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 курс</span>
+                    <div class="result-block"><span class="result-icon">✔️ итог</span> Практика устного общения, выполненные задания</div>
+                    <div class="coordinator">🧑‍🏫 Педагог доп.образования Осипов Р.В.</div>
+                </div>
+                <!-- Открытый микрофон «Вживую: открытый микрофон» -->
+                <div class="event-card">
+                    <div class="event-name">🎤 Открытый микрофон</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Открытый микрофон</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">03.02.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 2 курс</span>
+                    <div class="result-block"><span class="result-icon">📋 результат</span> Бумажные анкеты, личные наблюдения, навыки публички</div>
+                    <div class="coordinator">🧑‍🏫 Педагог-организатор Назаров С.С.</div>
+                </div>
+                <!-- Познавательная игровая программа «Без экрана – с правом» -->
+                <div class="event-card">
+                    <div class="event-name">⚖️ Без экрана – с правом</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Познавательная игра</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">04.02.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 ЗАДАННАЯ</span>
+                    <div class="result-block"><span class="result-icon">📌 результат</span> 3 базовых правила, персональные данные, действия при нарушении</div>
+                    <div class="coordinator">🧑‍🏫 Педагог доп.образования Осипов Р.В.</div>
+                </div>
+                <!-- Просмотр и обсуждение «Социальная дилемма» -->
+                <div class="event-card">
+                    <div class="event-name">🎬 Социальная дилемма</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Просмотр + обсуждение</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">05.02.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 и 2 курс</span>
+                    <div class="result-block"><span class="result-icon">🧠 итог</span> Памятка: 3 практики цифровой гигиены</div>
+                    <div class="coordinator">🧑‍🏫 Советник директора Иванова М.С.</div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; background: #f2ebe5; padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.9rem;">
+                🎯 Цель: Повысить навыки вербального общения, тренировка памяти и внимания · Организатор: ГБПОУ «ЮУМК» · Партнёр: Сетевое издание «Губерния - Южный Урал»
+            </div>
+        </div>
+
+        <!-- БЛОК 3: МИР ЦВЕТНЫХ КАРАНДАШЕЙ (третий текст) -->
+        <div class="program-section">
+            <span class="week-title">🖍️ Неделя творчества</span>
+            <div class="event-cards">
+                <!-- Фестиваль «Мир цветных карандашей» -->
+                <div class="event-card">
+                    <div class="event-name">🌈 Мир цветных карандашей</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Фестиваль</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">16.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 курс</span>
+                    <div class="result-block"><span class="result-icon">🖼️ продукт</span> Выставка рисунков, обмен техниками</div>
+                    <div class="coordinator">🧑‍🏫 Педагог доп.образования Осипов Р.В.</div>
+                </div>
+                <!-- Открытый микрофон «Разноцветные мысли» -->
+                <div class="event-card">
+                    <div class="event-name">🎨 Разноцветные мысли</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Открытый микрофон</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">17.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 2 курс</span>
+                    <div class="result-block"><span class="result-icon">🗺️ продукт</span> «Карта настроения», опыт публички</div>
+                    <div class="coordinator">🧑‍🏫 Педагог-организатор Назаров С.С.</div>
+                </div>
+                <!-- Развлекательная игровая «Правовая палитра» -->
+                <div class="event-card">
+                    <div class="event-name">⚖️ Правовая палитра</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Развлекательная игра</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">18.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 ЗАДАННАЯ</span>
+                    <div class="result-block"><span class="result-icon">📜 продукт</span> Плакат-коллаж «Кодекс цветных карандашей»</div>
+                    <div class="coordinator">🧑‍🏫 Педагог доп.образования Осипов Р.В.</div>
+                </div>
+                <!-- Виртуальная экскурсия «За кулисы карандашной фабрики» -->
+                <div class="event-card">
+                    <div class="event-name">✏️ За кулисы карандашной фабрики</div>
+                    <div class="event-detail"><span class="label">Форма:</span> <span class="value">Виртуальная экскурсия</span></div>
+                    <div class="event-detail"><span class="label">Дата:</span> <span class="value">19.03.2026 · 14:30</span></div>
+                    <div class="event-detail"><span class="label">Ауд.:</span> <span class="value">2005</span></div>
+                    <span class="target-badge">🎯 1 и 2 курс</span>
+                    <div class="result-block"><span class="result-icon">🎥 продукт</span> Руководитель медиа-цеха Петрова А.В.*</div>
+                    <div class="coordinator">🧑‍🏫 Советник директора Иванова М.С.</div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; background: #ebdfd6; padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.9rem;">
+                🎯 Цель: Популяризация творческого самовыражения, эстетическое воспитание · Организатор: ГБПОУ «ЮУМК» · Партнёр: ООО «Новый Книжный Центр»
+            </div>
+            <div class="tiny-note" style="margin-top: 0.6rem;">* В исходных данных указано "Петроаа А.В." — сохранено как Петрова А.В.</div>
+        </div>
+
+        <!-- ОБЩАЯ ЦЕЛЬ И ОРГАНИЗАТОР (из первого блока указаны, но здесь продублируем общее) -->
+        <hr>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; background: #f6ede8; border-radius: 28px; padding: 1.2rem 2rem; margin: 1rem 0;">
+            <div><span style="font-weight: 700;">🏢 Головной организатор:</span> ГБПОУ «ЮУМК»</div>
+            <div><span style="font-weight: 700;">🤝 Общие партнёры:</span> АНО «ЦНЕ», Сетевое издание, Книжный центр</div>
+            <div><span style="font-weight: 700;">💰 Финансирование:</span> Бюджетное</div>
+        </div>
+
+        <!-- КОНТАКТЫ / ФУТЕР  (стильный бежевый) -->
+        <div class="footer-contacts">
+            <div class="contact-info">
+                <h3>📬 Центр воспитания и развития</h3>
+                <div class="contact-detail">📍 ГБПОУ «Южно-Уральский многопрофильный колледж»</div>
+                <div class="contact-detail">📞 +7 (351) 000-00-00 (доб. 240) </div>
+                <div class="contact-detail">✉️ deti.razvitie@yumk.edu</div>
+                <div class="contact-detail">📅 Приёмная по воспитательной работе: пн–пт, 10:00–17:00</div>
+                <div class="partner-line" style="margin-top: 1rem;">
+                    🤝 Координация: зам. директора по ВР Колодий Е.Е., советник Иванова М.С., педагог Осипов Р.В.
+                </div>
+            </div>
+            <div style="background: #d8c5b7; padding: 1rem 2rem; border-radius: 60px; color: #2f2824; font-weight: 500; box-shadow: inset 0 0 0 1px #fffcf9;">
+                <span style="font-size: 1.3rem;">✨</span> МЕРЫ ДЕТСКОГО РАЗВИТИЯ <br> <span style="font-size: 0.9rem;">добрые слова · цифровая гигиена · творчество</span>
+            </div>
+        </div>
+        
+        <!-- Дополнительная информация: целевые аудитории и ответственность -->
+        <div style="display: flex; justify-content: space-between; margin-top: 1.2rem; color: #7f6a5d; font-size: 0.85rem; padding: 0 0.5rem;">
+            <span>📌 Все мероприятия проводятся в ауд. 2005, начало в 14:30</span>
+            <span>📌 Вопросы по участию: медиа-цех, Шершнева Е.В.</span>
+        </div>
+        <div style="margin-top: 0.6rem; font-size: 0.8rem; color: #ad9a8d; text-align: center; border-top: 1px dashed #ebdbd0; padding-top: 1.5rem;">
+            © 2026 · Программа содействия развитию · бежевый стиль · все мероприятия утверждены
+        </div>
+    </div>
+    <!-- конец page -->
 </body>
 </html>
